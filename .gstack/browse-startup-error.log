@@ -1,0 +1,5 @@
+2026-09-18T07:54:35.849Z [browse] No available port after 5 attempts in range 10000-60000
+Error: [browse] No available port after 5 attempts in range 10000-60000
+    at findPort (/Users/fiontan/.agents/skills/gstack/browse/src/server.ts:789:13)
+    at async start (/Users/fiontan/.agents/skills/gstack/browse/src/server.ts:2800:22)
+    at processTicksAndRejections (native:7:39)
