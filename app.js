@@ -37,10 +37,28 @@ featuredInterview.before(studentStoryIntro);
 // video sources at GitHub's LFS media endpoint so browsers receive the file.
 const lfsMediaPrefix = 'https://media.githubusercontent.com/media/fion0412/fiontan/main/';
 document.querySelectorAll('video source[src^="assets/"]').forEach((source) => {
-  if (/\.mp4$/i.test(source.getAttribute('src'))) {
-    source.src = lfsMediaPrefix + source.getAttribute('src');
-    source.closest('video')?.load();
-  }
+  const originalSrc = source.getAttribute('src');
+  if (!/\.mp4$/i.test(originalSrc)) return;
+
+  const video = source.closest('video');
+  const mediaUrl = lfsMediaPrefix + originalSrc;
+
+  // GitHub's LFS media endpoint intentionally responds as
+  // application/octet-stream. Fetching it as a Blob gives the browser an
+  // explicit video/mp4 type, avoiding a black/buffering player on Pages.
+  fetch(mediaUrl)
+    .then((response) => {
+      if (!response.ok) throw new Error(`Video request failed: ${response.status}`);
+      return response.blob();
+    })
+    .then((blob) => {
+      const playableBlob = blob.type === 'video/mp4'
+        ? blob
+        : new Blob([blob], { type: 'video/mp4' });
+      source.src = URL.createObjectURL(playableBlob);
+      video?.load();
+    })
+    .catch((error) => console.warn('Unable to load video:', originalSrc, error));
 });
 
 const featuredInterviewStyle = document.createElement('style');
