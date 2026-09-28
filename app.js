@@ -93,3 +93,35 @@ classSection.className = 'class-section section';
 classSection.id = 'classes';
 classSection.innerHTML = `<div class="eyebrow">AI TRAINING · BEHIND THE SCENES</div><h2>每一次上課，<br><em>都是一次真正的開始。</em></h2><p class="section-intro">在課堂裡學習、提問、實作，把 AI 從一個陌生工具，變成可以每天使用的能力。</p><div class="class-gallery">${classPhotos.map((file, index) => `<figure><img src="assets/course-highlights/${file}" alt="AI 培訓課程花絮 ${index + 1}"><figcaption>AI 培訓課程花絮 · ${String(index + 1).padStart(2, '0')}</figcaption></figure>`).join('')}</div>`;
 feedbackSection.after(classSection);
+const menuButton = document.querySelector('.menu');
+const siteNav = document.querySelector('.header nav');
+if (menuButton && siteNav) {
+  const menuStyle = document.createElement('style');
+  menuStyle.textContent = '@media(max-width:760px){.header nav.is-open{display:flex;position:absolute;top:70px;left:0;right:0;z-index:10;flex-direction:column;gap:0;background:rgba(7,21,45,.98);border-bottom:1px solid var(--gold);box-shadow:0 12px 30px rgba(0,0,0,.35)}.header nav.is-open a{padding:18px 24px;border-top:1px solid rgba(198,163,92,.18);font-size:14px}}';
+  document.head.appendChild(menuStyle);
+  menuButton.setAttribute('aria-label', '開啟選單');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('is-open');
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+  });
+  siteNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    siteNav.classList.remove('is-open');
+    menuButton.setAttribute('aria-expanded', 'false');
+  }));
+}
+const videoFitStyle = document.createElement('style');
+videoFitStyle.textContent = '.media-grid video,.feedback-grid video,.student-story-videos video{object-fit:contain;background:#000}';
+document.head.appendChild(videoFitStyle);
+const mainNav = document.querySelector('.header nav');
+if (mainNav && !mainNav.querySelector('a[href="seed-ai.html"]')) {
+  const digitalEmployeeLink = document.createElement('a');
+  digitalEmployeeLink.href = 'seed-ai.html';
+  digitalEmployeeLink.textContent = '数字员工';
+  const contactLink = mainNav.querySelector('a[href="contact.html"]');
+  mainNav.insertBefore(digitalEmployeeLink, contactLink || null);
+}
+const aboutNavLink = document.querySelector('.header nav a[href="about.html"]');
+if (aboutNavLink) {
+  mainNav?.insertBefore(aboutNavLink, mainNav.firstElementChild || null);
+}
