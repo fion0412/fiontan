@@ -39,6 +39,7 @@ const lfsMediaPrefix = 'https://media.githubusercontent.com/media/fion0412/fiont
 document.querySelectorAll('video source[src^="assets/"]').forEach((source) => {
   if (/\.mp4$/i.test(source.getAttribute('src'))) {
     source.src = lfsMediaPrefix + source.getAttribute('src');
+    source.closest('video')?.load();
   }
 });
 
