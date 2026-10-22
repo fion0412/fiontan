@@ -117,7 +117,7 @@ const mainNav = document.querySelector('.header nav');
 if (mainNav && !mainNav.querySelector('a[href="seed-ai.html"]')) {
   const digitalEmployeeLink = document.createElement('a');
   digitalEmployeeLink.href = 'seed-ai.html';
-  digitalEmployeeLink.textContent = '数字员工';
+  digitalEmployeeLink.textContent = '數字員工';
   const contactLink = mainNav.querySelector('a[href="contact.html"]');
   mainNav.insertBefore(digitalEmployeeLink, contactLink || null);
 }

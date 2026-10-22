@@ -9,7 +9,7 @@
 .de-testimonial-points{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
 .de-testimonial-points span{padding:11px 16px;border:1px solid #c7a45b66;border-radius:30px;color:var(--gold);font-size:13px}
 .de-video-card{position:relative;margin:0;border:1px solid #c7a45b88;border-radius:18px;padding:8px;background:#07172d;box-shadow:15px 18px 0 #07172d80,0 25px 55px #0005;transform:rotate(1deg)}
-.de-video-card video{display:block;width:100%;aspect-ratio:9/16;max-height:650px;object-fit:cover;border-radius:12px;background:#07172d}
+.de-video-card video{display:block;width:100%;aspect-ratio:16/9;height:auto;max-height:none;object-fit:contain;border-radius:12px;background:#07172d}
 .de-video-card figcaption{display:flex;justify-content:space-between;gap:15px;padding:17px 10px 8px;align-items:center}
 .de-video-card figcaption b{font-size:15px;color:var(--cream)}.de-video-card figcaption small{color:var(--gold);font-size:10px;letter-spacing:.08em}
 /* Business challenges: match the navy, cream and gold brand palette. */
